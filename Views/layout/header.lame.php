@@ -13,7 +13,7 @@ $web = new Web();
 <header class="site-header">
   <div class="brand">
     <span class="brand-accent"><img src="Public/assets/le-logo-de-la-formule-1.jpg" alt="Logo F1"></span> Paddock Manager
-    <small class="brand-tagline">Administration des Grands Prix, écuries et pilotes</small>
+    <small class="brand-tagline">Administration des Grands Prix, équipes et joueurs</small>
   </div>
   <div class="header-right">
     <?= $web->menu(); ?>

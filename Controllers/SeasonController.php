@@ -65,7 +65,7 @@ class SeasonController extends BaseController
         ]);
     }
 
-    /** Affiche le classement pilotes mis à jour à partir des résultats en base. */
+    /** Affiche le classement joueurs mis à jour à partir des résultats en base. */
     public function standings(): void
     {
         $pdo = Database::getInstance();
@@ -207,11 +207,11 @@ class SeasonController extends BaseController
         }
 
         if ($joueurId <= 0) {
-            $errors[] = 'Pilote invalide.';
+            $errors[] = 'Joueur invalide.';
         } else {
             $driverExists = Database::query('SELECT 1 FROM joueurs WHERE id = ?', [$joueurId])->fetchColumn();
             if (!$driverExists) {
-                $errors[] = 'Pilote introuvable.';
+                $errors[] = 'Joueur introuvable.';
             }
         }
 
@@ -231,7 +231,7 @@ class SeasonController extends BaseController
             }
             $exists = Database::query($sql, $params)->fetchColumn();
             if ($exists) {
-                $errors[] = 'Ce pilote a déjà un résultat pour cette manche.';
+                $errors[] = 'Ce joueur a déjà un résultat pour cette manche.';
             }
 
             $params = [$courseId, $position];

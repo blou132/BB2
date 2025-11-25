@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 /**
- * Représente un pilote de Formule 1.
+ * Représente un joueur de Formule 1.
  */
 class Joueur
 {

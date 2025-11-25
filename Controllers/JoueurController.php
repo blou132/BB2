@@ -6,11 +6,11 @@ namespace App\Controllers;
 use App\Database\Database;
 
 /**
- * Contrôleur CRUD des pilotes et vue jointure avec leurs écuries.
+ * Contrôleur CRUD des joueurs et vue jointure avec leurs équipes.
  */
 class JoueurController extends BaseController
 {
-    /** Recharge la vue pilote avec liste complète et messages d'erreurs. */
+    /** Recharge la vue joueur avec liste complète et messages d'erreurs. */
     private function renderList(array $errors = []): void
     {
         $pdo = Database::getInstance();
@@ -34,16 +34,16 @@ class JoueurController extends BaseController
         $poste = ValidationController::clean($_POST['poste'] ?? '');
         $id_equipe = (int)($_POST['id_equipe'] ?? 0);
         $errors = [];
-        if (!ValidationController::nom($nom)) $errors[] = 'Nom de pilote invalide';
-        if (!ValidationController::nom($prenom)) $errors[] = 'Prénom de pilote invalide';
+        if (!ValidationController::nom($nom)) $errors[] = 'Nom de joueur invalide';
+        if (!ValidationController::nom($prenom)) $errors[] = 'Prénom de joueur invalide';
         if (!ValidationController::poste($poste)) $errors[] = 'Rôle invalide';
-        if ($id_equipe <= 0) $errors[] = 'Écurie requise';
+        if ($id_equipe <= 0) $errors[] = 'Équipe requise';
         $photo = $this->handleImageUpload('photo');
         if ($id_equipe > 0) {
             $stmt = $pdo->prepare('SELECT 1 FROM equipes WHERE id = ?');
             $stmt->execute([$id_equipe]);
             if (!$stmt->fetchColumn()) {
-                $errors[] = 'Écurie introuvable';
+                $errors[] = 'Équipe introuvable';
             }
         }
         if ($errors) {
@@ -68,16 +68,16 @@ class JoueurController extends BaseController
         $photo = $this->handleImageUpload('photo') ?? $this->sanitizeExistingUpload('photo_exist');
         $errors = [];
         if ($id <= 0) $errors[] = 'Identifiant invalide';
-        if (!ValidationController::nom($nom)) $errors[] = 'Nom de pilote invalide';
-        if (!ValidationController::nom($prenom)) $errors[] = 'Prénom de pilote invalide';
+        if (!ValidationController::nom($nom)) $errors[] = 'Nom de joueur invalide';
+        if (!ValidationController::nom($prenom)) $errors[] = 'Prénom de joueur invalide';
         if (!ValidationController::poste($poste)) $errors[] = 'Rôle invalide';
-        if ($id_equipe <= 0) $errors[] = 'Écurie requise';
+        if ($id_equipe <= 0) $errors[] = 'Équipe requise';
 
         if (!$errors) {
             $stmt = $pdo->prepare('SELECT 1 FROM joueurs WHERE id = ?');
             $stmt->execute([$id]);
             if (!$stmt->fetchColumn()) {
-                $errors[] = 'Pilote introuvable';
+                $errors[] = 'Joueur introuvable';
             }
         }
 
@@ -85,7 +85,7 @@ class JoueurController extends BaseController
             $stmt = $pdo->prepare('SELECT 1 FROM equipes WHERE id = ?');
             $stmt->execute([$id_equipe]);
             if (!$stmt->fetchColumn()) {
-                $errors[] = 'Écurie introuvable';
+                $errors[] = 'Équipe introuvable';
             }
         }
 
@@ -112,7 +112,7 @@ class JoueurController extends BaseController
             $stmt = $pdo->prepare('DELETE FROM joueurs WHERE id=?');
             $stmt->execute([$id]);
             if ($stmt->rowCount() === 0) {
-                $errors[] = 'Pilote introuvable ou déjà supprimé';
+                $errors[] = 'Joueur introuvable ou déjà supprimé';
             }
         }
 
@@ -124,7 +124,7 @@ class JoueurController extends BaseController
         $this->redirectTo('joueurs');
     }
 
-    /** Vue jointe Pilote + Écurie */
+    /** Vue jointe Joueur + Équipe */
     public function withEquipes(): void
     {
         $pdo = Database::getInstance();

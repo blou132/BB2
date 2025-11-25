@@ -1,10 +1,10 @@
 <?php
-// Tableau de bord d'accueil : statistiques, top écuries, pilotes et vitrine des GP
+// Tableau de bord d'accueil : statistiques, top équipes, joueurs et vitrine des GP
 ?>
 <section class="dashboard">
   <header class="dashboard-head">
     <h2>Bienvenue sur le paddock</h2>
-    <p>Surveillez l'écosystème Formule&nbsp;1 depuis un seul cockpit&nbsp;: Grands Prix, écuries, pilotes.</p>
+    <p>Surveillez l'écosystème Formule&nbsp;1 depuis un seul cockpit&nbsp;: Grands Prix, équipes, joueurs.</p>
   </header>
 
   <?php // Cartes statistiques principales ?>
@@ -14,16 +14,16 @@
       <strong class="card-value"><?= $stats['grands_prix'] ?? 0 ?></strong>
     </article>
     <article class="card card-stat">
-      <span class="card-label">Écuries enregistrées</span>
-      <strong class="card-value"><?= $stats['ecuries'] ?? 0 ?></strong>
+      <span class="card-label">Équipes enregistrées</span>
+      <strong class="card-value"><?= $stats['equipes'] ?? 0 ?></strong>
     </article>
     <article class="card card-stat">
-      <span class="card-label">Pilotes sous contrat</span>
-      <strong class="card-value"><?= $stats['pilotes'] ?? 0 ?></strong>
+      <span class="card-label">Joueurs sous contrat</span>
+      <strong class="card-value"><?= $stats['joueurs'] ?? 0 ?></strong>
     </article>
   </div>
 
-  <?php // Grille principale : Grands Prix, écuries, pilotes ?>
+  <?php // Grille principale : Grands Prix, équipes, joueurs ?>
   <div class="dashboard-grid">
     <section class="panel">
       <header class="panel-head">
@@ -47,18 +47,18 @@
 
     <section class="panel">
       <header class="panel-head">
-        <h3>Top écuries (effectif)</h3>
+        <h3>Top équipes (effectif)</h3>
       </header>
-      <?php // Liste des écuries avec logo et effectif ?>
+      <?php // Liste des équipes avec logo et effectif ?>
       <ul class="list list-teams">
         <?php foreach ($topTeams as $team): ?>
           <li class="list-item">
             <?php if (!empty($team['blason'])): ?>
-              <img src="<?= htmlspecialchars($team['blason']) ?>" alt="logo écurie" class="list-thumb">
+              <img src="<?= htmlspecialchars($team['blason']) ?>" alt="logo équipe" class="list-thumb">
             <?php endif; ?>
             <div class="list-content">
               <strong><?= htmlspecialchars($team['nom']) ?></strong>
-              <span><?= (int)$team['pilotes'] ?> pilote<?= ((int)$team['pilotes']) > 1 ? 's' : '' ?></span>
+              <span><?= (int)$team['joueurs'] ?> joueur<?= ((int)$team['joueurs']) > 1 ? 's' : '' ?></span>
             </div>
           </li>
         <?php endforeach; ?>
@@ -67,18 +67,18 @@
 
     <section class="panel">
       <header class="panel-head">
-        <h3>Pilotes à l'affiche</h3>
+        <h3>Joueurs à l'affiche</h3>
       </header>
-      <?php // Piliers présentant les pilotes phares ?>
+      <?php // Piliers présentant les joueurs phares ?>
       <div class="pill-grid">
-        <?php foreach ($pilotesSpotlight as $pilote): ?>
+        <?php foreach ($joueursSpotlight as $joueur): ?>
           <article class="pill">
-            <?php if (!empty($pilote['photo'])): ?>
-              <img src="<?= htmlspecialchars($pilote['photo']) ?>" alt="portrait pilote" class="pill-thumb">
+            <?php if (!empty($joueur['photo'])): ?>
+              <img src="<?= htmlspecialchars($joueur['photo']) ?>" alt="portrait joueur" class="pill-thumb">
             <?php endif; ?>
             <div>
-              <strong><?= htmlspecialchars($pilote['prenom'] . ' ' . $pilote['nom']) ?></strong>
-              <span><?= htmlspecialchars($pilote['equipe']) ?></span>
+              <strong><?= htmlspecialchars($joueur['prenom'] . ' ' . $joueur['nom']) ?></strong>
+              <span><?= htmlspecialchars($joueur['equipe']) ?></span>
             </div>
           </article>
         <?php endforeach; ?>

@@ -13,9 +13,9 @@ class HtmlController
         $items = [
             'Accueil' => '?route=accueil',
             'Grands Prix' => '?route=championnats',
-            'Écuries' => '?route=equipes',
-            'Pilotes' => '?route=joueurs',
-            'Pilotes par écurie' => '?route=jointure',
+            'Équipes' => '?route=equipes',
+            'Joueurs' => '?route=joueurs',
+            'Joueurs par équipe' => '?route=jointure',
             'Calendrier 2026' => '?route=calendrier',
             'Classement' => '?route=classements',
         ];

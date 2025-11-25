@@ -18,9 +18,9 @@ $grandsPrix = [
 ];
 
 $equipes = [
-    ['nom' => 'Mercedes-AMG Petronas', 'ville' => 'Brackley',      'championnat' => 3, 'blason' => null],
-    ['nom' => 'Oracle Red Bull Racing','ville' => 'Milton Keynes', 'championnat' => 1, 'blason' => null],
-    ['nom' => 'Scuderia Ferrari',      'ville' => 'Maranello',     'championnat' => 2, 'blason' => null],
+    ['nom' => 'Mercedes-AMG Petronas', 'ville' => 'Royaume-Uni',   'championnat' => 3, 'blason' => null],
+    ['nom' => 'Oracle Red Bull Racing','ville' => 'Royaume-Uni',   'championnat' => 1, 'blason' => null],
+    ['nom' => 'Scuderia Ferrari',      'ville' => 'Italie',        'championnat' => 2, 'blason' => null],
 ];
 
 $courses = [
@@ -49,13 +49,13 @@ $courses = [
     ['ordre' => 23, 'code' => 'ABU', 'nom' => 'Grand Prix d\'Abou Dabi',            'pays' => 'Émirats arabes unis','ville' => 'Yas Marina',   'date' => '2026-12-20', 'flag' => '🇦🇪'],
 ];
 
-$pilotes = [
-    ['nom' => 'Hamilton',   'prenom' => 'Lewis',   'poste' => 'Pilote titulaire', 'equipe' => 1, 'photo' => null],
-    ['nom' => 'Russell',    'prenom' => 'George',  'poste' => 'Pilote titulaire', 'equipe' => 1, 'photo' => null],
-    ['nom' => 'Verstappen', 'prenom' => 'Max',     'poste' => 'Pilote titulaire', 'equipe' => 2, 'photo' => null],
-    ['nom' => 'Perez',      'prenom' => 'Sergio',  'poste' => 'Pilote titulaire', 'equipe' => 2, 'photo' => null],
-    ['nom' => 'Leclerc',    'prenom' => 'Charles', 'poste' => 'Pilote titulaire', 'equipe' => 3, 'photo' => null],
-    ['nom' => 'Sainz',      'prenom' => 'Carlos',  'poste' => 'Pilote titulaire', 'equipe' => 3, 'photo' => null],
+$joueurs = [
+    ['nom' => 'Hamilton',   'prenom' => 'Lewis',   'poste' => 'Joueur titulaire', 'equipe' => 1, 'photo' => null],
+    ['nom' => 'Russell',    'prenom' => 'George',  'poste' => 'Joueur titulaire', 'equipe' => 1, 'photo' => null],
+    ['nom' => 'Verstappen', 'prenom' => 'Max',     'poste' => 'Joueur titulaire', 'equipe' => 2, 'photo' => null],
+    ['nom' => 'Perez',      'prenom' => 'Sergio',  'poste' => 'Joueur titulaire', 'equipe' => 2, 'photo' => null],
+    ['nom' => 'Leclerc',    'prenom' => 'Charles', 'poste' => 'Joueur titulaire', 'equipe' => 3, 'photo' => null],
+    ['nom' => 'Sainz',      'prenom' => 'Carlos',  'poste' => 'Joueur titulaire', 'equipe' => 3, 'photo' => null],
 ];
 
 $courseResults = [
@@ -117,9 +117,9 @@ try {
         $courseIds[$course['code']] = (int)$pdo->lastInsertId();
     }
 
-    $stmtPilote = $pdo->prepare('INSERT INTO joueurs (nom, prenom, poste, id_equipe, photo) VALUES (?, ?, ?, ?, ?)');
-    foreach ($pilotes as $pilote) {
-        $stmtPilote->execute([$pilote['nom'], $pilote['prenom'], $pilote['poste'], $pilote['equipe'], $pilote['photo']]);
+    $stmtJoueur = $pdo->prepare('INSERT INTO joueurs (nom, prenom, poste, id_equipe, photo) VALUES (?, ?, ?, ?, ?)');
+    foreach ($joueurs as $joueur) {
+        $stmtJoueur->execute([$joueur['nom'], $joueur['prenom'], $joueur['poste'], $joueur['equipe'], $joueur['photo']]);
     }
 
     $stmtResult = $pdo->prepare('INSERT INTO course_results (course_id, joueur_id, position, points) VALUES (?, ?, ?, ?)');

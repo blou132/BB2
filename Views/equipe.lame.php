@@ -1,5 +1,5 @@
 <section>
-  <h2>Écuries</h2>
+  <h2>Équipes</h2>
   <?php if (!empty($errors)): ?>
     <div class="alert">
       <?php foreach ($errors as $e): ?><p><?= htmlspecialchars($e) ?></p><?php endforeach; ?>
@@ -9,10 +9,10 @@
   <?php if (!empty($currentUser)): ?>
     <form method="post" enctype="multipart/form-data" action="?route=equipes&action=store">
       <fieldset>
-        <legend>Ajouter une écurie</legend>
+        <legend>Ajouter une équipe</legend>
         <input type="hidden" name="_csrf" value="<?= htmlspecialchars($csrfToken) ?>">
         <label>Nom <input name="nom" type="text" required></label><br/>
-        <label>Base (Ville) <input name="ville" type="text" required></label><br/>
+        <label>Pays <input name="ville" type="text" required></label><br/>
         <label>Grand Prix associé
           <select name="id_championnat" required>
             <option value="">— choisir —</option>
@@ -32,7 +32,7 @@
   <?php endif; ?>
 
   <table>
-    <thead><tr><th>ID</th><th>Écurie</th><th>Base</th><th>Grand Prix</th><th>Logo</th><?php if (!empty($currentUser)): ?><th>Actions</th><?php endif; ?></tr></thead>
+    <thead><tr><th>ID</th><th>Équipe</th><th>Pays</th><th>Grand Prix</th><th>Logo</th><?php if (!empty($currentUser)): ?><th>Actions</th><?php endif; ?></tr></thead>
     <tbody>
     <?php foreach ($equipes as $e): ?>
       <tr>
@@ -40,7 +40,7 @@
         <td><?= htmlspecialchars($e['nom']) ?></td>
         <td><?= htmlspecialchars($e['ville']) ?></td>
         <td><?= htmlspecialchars($e['championnat']) ?></td>
-        <td><?php if ($e['blason']): ?><img src="<?= htmlspecialchars($e['blason']) ?>" alt="logo écurie" class="thumb"><?php endif; ?></td>
+        <td><?php if ($e['blason']): ?><img src="<?= htmlspecialchars($e['blason']) ?>" alt="logo équipe" class="thumb"><?php endif; ?></td>
         <?php if (!empty($currentUser)): ?>
         <td>
           <details>
@@ -49,7 +49,7 @@
                 <input type="hidden" name="id" value="<?= $e['id'] ?>">
                 <input type="hidden" name="_csrf" value="<?= htmlspecialchars($csrfToken) ?>">
                 <label>Nom <input name="nom" value="<?= htmlspecialchars($e['nom']) ?>" required></label>
-                <label>Base (Ville) <input name="ville" value="<?= htmlspecialchars($e['ville']) ?>" required></label>
+                <label>Pays <input name="ville" value="<?= htmlspecialchars($e['ville']) ?>" required></label>
                 <label>Grand Prix associé
                   <select name="id_championnat" required>
                     <?php foreach ($championnats as $c): ?>
@@ -61,7 +61,7 @@
                 <label>Nouveau logo <input type="file" name="blason" accept="image/*"></label>
                 <button>Mettre à jour</button>
               </form>
-              <form method="post" action="?route=equipes&action=delete" onsubmit="return confirm('Supprimer cette écurie&nbsp;?')">
+              <form method="post" action="?route=equipes&action=delete" onsubmit="return confirm('Supprimer cette équipe&nbsp;?')">
                 <input type="hidden" name="id" value="<?= $e['id'] ?>">
                 <input type="hidden" name="_csrf" value="<?= htmlspecialchars($csrfToken) ?>">
                 <button class="danger">Supprimer</button>

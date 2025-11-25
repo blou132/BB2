@@ -6,11 +6,11 @@ namespace App\Controllers;
 use App\Database\Database;
 
 /**
- * Contrôleur CRUD des écuries de Formule 1.
+ * Contrôleur CRUD des équipes de Formule 1.
  */
 class EquipeController extends BaseController
 {
-    /** Recharge la page principale avec les écuries, GPs et éventuels messages. */
+    /** Recharge la page principale avec les équipes, GPs et éventuels messages. */
     private function renderList(array $errors = []): void
     {
         $pdo = Database::getInstance();
@@ -33,8 +33,8 @@ class EquipeController extends BaseController
         $ville = ValidationController::clean($_POST['ville'] ?? '');
         $idc = (int)($_POST['id_championnat'] ?? 0);
         $errors = [];
-        if (!ValidationController::nom($nom)) $errors[] = 'Nom d\'écurie invalide';
-        if (!ValidationController::ville($ville)) $errors[] = 'Ville / base invalide';
+        if (!ValidationController::nom($nom)) $errors[] = 'Nom d\'équipe invalide';
+        if (!ValidationController::ville($ville)) $errors[] = 'Pays invalide';
         if ($idc <= 0) $errors[] = 'Grand Prix requis';
         $blason = $this->handleImageUpload('blason');
         if ($idc > 0) {
@@ -65,15 +65,15 @@ class EquipeController extends BaseController
         $blason = $this->handleImageUpload('blason') ?? $this->sanitizeExistingUpload('blason_exist');
         $errors = [];
         if ($id <= 0) $errors[] = 'Identifiant invalide';
-        if (!ValidationController::nom($nom)) $errors[] = 'Nom d\'écurie invalide';
-        if (!ValidationController::ville($ville)) $errors[] = 'Ville / base invalide';
+        if (!ValidationController::nom($nom)) $errors[] = 'Nom d\'équipe invalide';
+        if (!ValidationController::ville($ville)) $errors[] = 'Pays invalide';
         if ($idc <= 0) $errors[] = 'Grand Prix requis';
 
         if (!$errors) {
             $stmt = $pdo->prepare('SELECT 1 FROM equipes WHERE id = ?');
             $stmt->execute([$id]);
             if (!$stmt->fetchColumn()) {
-                $errors[] = 'Écurie introuvable';
+                $errors[] = 'Équipe introuvable';
             }
         }
 
@@ -108,7 +108,7 @@ class EquipeController extends BaseController
             $stmt = $pdo->prepare('DELETE FROM equipes WHERE id=?');
             $stmt->execute([$id]);
             if ($stmt->rowCount() === 0) {
-                $errors[] = 'Écurie introuvable ou déjà supprimée';
+                $errors[] = 'Équipe introuvable ou déjà supprimée';
             }
         }
 

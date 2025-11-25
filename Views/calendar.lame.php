@@ -49,8 +49,8 @@
           <thead>
             <tr>
               <th>Position</th>
-              <th>Pilote</th>
-              <th>Écurie</th>
+              <th>Joueur</th>
+              <th>Équipe</th>
               <th>Points</th>
               <?php if (!empty($currentUser)): ?>
                 <th>Actions</th>
@@ -72,7 +72,7 @@
                         <input type="hidden" name="_csrf" value="<?= htmlspecialchars($csrfToken) ?>">
                         <input type="hidden" name="result_id" value="<?= (int)$row['result_id'] ?>">
                         <input type="hidden" name="course_id" value="<?= (int)$selectedCourse['id'] ?>">
-                        <label>Pilote
+                        <label>Joueur
                           <select name="joueur_id" required>
                             <?php foreach ($drivers as $driver): ?>
                               <option value="<?= (int)$driver['id'] ?>" <?= (int)$driver['id'] === (int)$row['joueur_id'] ? 'selected' : '' ?>>
@@ -107,9 +107,9 @@
             <legend>Ajouter un résultat</legend>
             <input type="hidden" name="_csrf" value="<?= htmlspecialchars($csrfToken) ?>">
             <input type="hidden" name="course_id" value="<?= (int)$selectedCourse['id'] ?>">
-            <label>Pilote
+            <label>Joueur
               <select name="joueur_id" required>
-                <option value="">— choisir un pilote —</option>
+                <option value="">— choisir un joueur —</option>
                 <?php foreach ($drivers as $driver): ?>
                   <option value="<?= (int)$driver['id'] ?>">
                     <?= htmlspecialchars($driver['prenom'] . ' ' . $driver['nom'] . ' — ' . $driver['equipe']) ?>

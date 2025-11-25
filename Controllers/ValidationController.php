@@ -21,7 +21,7 @@ class ValidationController
 
     public static function poste(string $s): bool
     {
-        // ex: Pilote titulaire, Réserve, Directeur
+        // ex: Joueur titulaire, Réserve, Directeur
         return (bool)preg_match("/^[A-Za-zÀ-ÿ' -]{2,40}$/u", $s);
     }
 

@@ -12,12 +12,12 @@ Navigateur → index.php → Controller → (Validation, CSRF, Uploads)
 
 - **index.php** oriente vers le bon contrôleur en fonction des paramètres `route` et `action`.
 - **Controllers/** mettent en œuvre la logique métier et orchestrent les appels à la base de données.
-- **Models/** sont des objets simples (POPO) représentant les entités Grands Prix, Écuries, Pilotes.
+- **Models/** sont des objets simples (POPO) représentant les entités Grands Prix, Équipes, Joueurs.
 - **Views/** structurent l’interface HTML, le layout et les formulaires.
 - **Database/Database.php** expose un singleton PDO et les migrations SQLite.
 - **Security/Csrf.php** fournit le jeton CSRF injecté dans chaque vue.
 
-## Flux CRUD (exemple Pilote)
+## Flux CRUD (exemple Joueur)
 
 1. L’utilisateur soumet le formulaire `?route=joueurs&action=store`.
 2. `JoueurController::store()` appelle `requireCsrf()`, nettoie et valide les champs.
@@ -36,4 +36,3 @@ Navigateur → index.php → Controller → (Validation, CSRF, Uploads)
 - Nommage PSR-4 (Autoload minimal).
 - HTML échappé via `htmlspecialchars`.
 - Uploads stockés en `Public/uploads` (à servir via front controller).
-

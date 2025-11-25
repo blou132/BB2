@@ -64,16 +64,16 @@ switch ($route) {
         $pdo = Database::getInstance();
         $stats = [
             'grands_prix' => (int)$pdo->query('SELECT COUNT(*) FROM championnats')->fetchColumn(),
-            'ecuries' => (int)$pdo->query('SELECT COUNT(*) FROM equipes')->fetchColumn(),
-            'pilotes' => (int)$pdo->query('SELECT COUNT(*) FROM joueurs')->fetchColumn(),
+            'equipes' => (int)$pdo->query('SELECT COUNT(*) FROM equipes')->fetchColumn(),
+            'joueurs' => (int)$pdo->query('SELECT COUNT(*) FROM joueurs')->fetchColumn(),
         ];
-        $topTeams = $pdo->query('SELECT e.nom, e.blason, COUNT(j.id) AS pilotes
+        $topTeams = $pdo->query('SELECT e.nom, e.blason, COUNT(j.id) AS joueurs
                                   FROM equipes e
                                   LEFT JOIN joueurs j ON j.id_equipe = e.id
                                   GROUP BY e.id
-                                  ORDER BY pilotes DESC, e.nom
+                                  ORDER BY joueurs DESC, e.nom
                                   LIMIT 3')->fetchAll();
-        $pilotesSpotlight = $pdo->query('SELECT j.nom, j.prenom, j.photo, e.nom AS equipe
+        $joueursSpotlight = $pdo->query('SELECT j.nom, j.prenom, j.photo, e.nom AS equipe
                                           FROM joueurs j
                                           JOIN equipes e ON e.id = j.id_equipe
                                           ORDER BY j.nom

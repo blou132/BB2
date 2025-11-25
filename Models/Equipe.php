@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 /**
- * Représente une écurie de Formule 1.
+ * Représente une équipe de Formule 1.
  */
 class Equipe
 {

@@ -25,20 +25,20 @@ foreach ($drivers as $driver) {
 ?>
 <section class="season-view">
   <header class="season-head">
-    <h2>Classement pilotes</h2>
+    <h2>Classement joueurs</h2>
     <p>Total des points calculé automatiquement à partir des résultats officiels. Passez la souris sur les cellules pour voir les détails d'une manche.</p>
   </header>
 
   <?php if (empty($drivers)): ?>
-    <p class="info-guest">Aucun pilote enregistré pour le moment.</p>
+    <p class="info-guest">Aucun joueur enregistré pour le moment.</p>
   <?php else: ?>
     <div class="standings-wrapper">
       <table class="points-table">
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Pilote</th>
-            <th scope="col">Écurie</th>
+            <th scope="col">Joueur</th>
+            <th scope="col">Équipe</th>
             <?php foreach ($courses as $course): ?>
               <th scope="col" class="col-round" title="<?= htmlspecialchars($course['nom']) ?>"><?= htmlspecialchars($course['code']) ?></th>
             <?php endforeach; ?>
